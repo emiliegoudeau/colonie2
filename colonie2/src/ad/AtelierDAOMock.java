@@ -29,6 +29,12 @@ public class AtelierDAOMock implements AtelierDAO {
 		return a;
 		
 	}
+
+	@Override
+	public void insert(Atelier atelier) throws DAOException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

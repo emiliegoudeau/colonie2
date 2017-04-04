@@ -1,6 +1,7 @@
 package ad;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,13 +27,11 @@ public class AtelierDAOImpl extends DAO implements AtelierDAO {
 		return instance;
 	}
 
-	
 	/**
 	 * Méthode qui permet de récupérer 1 atelier à partir de son identifiant
 	 * avec la liste des enfants participants à cet atelier
 	 * 
 	 */
-
 
 	public List<Enfant> selectAtelier(Integer idAtelier) throws DAOException {
 
@@ -75,7 +74,6 @@ public class AtelierDAOImpl extends DAO implements AtelierDAO {
 		return list;
 	}
 
-	
 	/**
 	 * Méthode qui permet de récupérer la liste de tous les ateliers
 	 */
@@ -121,10 +119,8 @@ public class AtelierDAOImpl extends DAO implements AtelierDAO {
 		return listeAtelier;
 	}
 
-	
 	/**
-	 * Méthode qui permet de récupérer un atelier 
-	 * à partir de son identifiant
+	 * Méthode qui permet de récupérer un atelier à partir de son identifiant
 	 */
 
 	@Override
@@ -168,5 +164,34 @@ public class AtelierDAOImpl extends DAO implements AtelierDAO {
 
 	}
 
-	
+	/**
+	 * Méthode qui permet d'ajouter un atelier à la BDD
+	 * 
+	 */
+
+	public void insert(Atelier atelier) throws DAOException {
+
+		Connection con = getConnection();
+
+		String requete = "";
+
+		requete = "INSERT INTO ATELIERS (NOM, AgeMini, AgeMaxi, NbPlaces) " + "VALUES (?,?,?,?)";
+
+		PreparedStatement stmt = null;
+		try {
+			stmt = con.prepareStatement(requete);
+
+			stmt.setString(1, atelier.getNom());
+			stmt.setInt(2, atelier.getAgeMini());
+			stmt.setInt(3, atelier.getAgeMaxi());
+			stmt.setInt(4, atelier.getNbPlace());
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DAOException("Probleme dans l'ajout de votre requete SQL");
+		}
+
+		closeConnection();
+	}
+
 }
