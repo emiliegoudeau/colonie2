@@ -13,4 +13,7 @@ public interface AtelierDAO {
 	public Atelier selectUnAtelier(Integer idA) throws DAOException;
 	public void insert(Atelier atelier) throws DAOException;
 	
+	/*
+	 * Modif
+	 */
 }

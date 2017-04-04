@@ -41,7 +41,7 @@ public class AtelierDAOImpl extends DAO implements AtelierDAO {
 		ResultSet resultats = null;
 		String requete = " ";
 
-		requete = "SELECT enfants.Nom, enfants.Prenom,enfants.ID_Enfant FROM enfants "
+		requete = "SELECT enfants.Nom, enfants.Prenom,enfants.ID_Enfant, enfants.Ddn FROM enfants "
 				+ "INNER JOIN detailsatelier ON detailsatelier.ID_Enfant=enfants.ID_Enfant "
 				+ "INNER JOIN ateliers ON ateliers.ID_Ateliers=detailsatelier.ID_DetailsAtelier "
 				+ "WHERE(detailsatelier.ID_Ateliers=" + idAtelier + ")";
@@ -57,11 +57,12 @@ public class AtelierDAOImpl extends DAO implements AtelierDAO {
 		try {
 			while (resultats.next()) {
 				System.out.println(resultats.getString("nom") + " " + resultats.getString("prenom") + " "
-						+ resultats.getInt("ID_Enfant"));
+						+ resultats.getInt("ID_Enfant")+ " " + "(" + resultats.getDate("Ddn") + ")");
 				Enfant enfant = new Enfant();
 				enfant.setNom(resultats.getString("nom"));
 				enfant.setPrenom(resultats.getString("prenom"));
 				enfant.setIdEnfant(resultats.getInt("ID_Enfant"));
+				enfant.setDdn(resultats.getDate("Ddn"));
 				list.add(enfant);
 			}
 
@@ -166,6 +167,7 @@ public class AtelierDAOImpl extends DAO implements AtelierDAO {
 
 	/**
 	 * Méthode qui permet d'ajouter un atelier à la BDD
+	 * verif
 	 * 
 	 */
 
