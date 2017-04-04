@@ -79,22 +79,50 @@ public class AtelierServiceImpl implements AtelierService {
 		return l;
 	}
 
+	// verifier si un enfant est dans un atelier particulier
+	public Boolean enfantDansUnAtelier(List<Enfant> lEnfant, Enfant e) {
+		Boolean b = false;
+		for (Enfant enfant : lEnfant) {
+			if (enfant.getIdEnfant() == e.getIdEnfant()) {
+				b = true;
+			}
+
+		}
+		return b;
+	}
+
+	// Liste des enfant occupé
 	@Override
-	public List<Enfant> enfantNonOccupe(List<Atelier> l, List<Enfant> lEnfant) {
+	public List<Enfant> enfantOccupe(List<Atelier> l, List<Enfant> lEnfant) throws DAOException {
+		List<Enfant> lE = new ArrayList<Enfant>();
+		for (Enfant enfant : lEnfant) {
+			for (Atelier atelier : l) {
+				List<Enfant> lEn = new ArrayList<Enfant>();
+				lEn = AtelierDAOImpl.getInstance().selectAtelier(atelier.getIdAtelier());
+				if (enfantDansUnAtelier(lEn, enfant)) {
+					lE.add(enfant);
+				}
+			}
+		}
+		return lE;
+	}
+	
+		// Liste des enfant  non occupé (fonctionne pas)
+	@Override
+	public List<Enfant> enfantNonOccupe(List<Atelier> l, List<Enfant> lEnfant) throws DAOException {
 		List<Enfant> lE = new ArrayList<Enfant>();
 		for (Enfant enfant : lEnfant) {
 			Boolean bool = false;
-			while (bool == false) {
-				for (Atelier atelier : l) {
-					for (Enfant e : atelier.getListe()) {
-						if (enfant.getIdEnfant() == e.getIdEnfant()) {
-							bool = true;
-						}
-					}
+			for (Enfant e : enfantOccupe(l, lEnfant)) {
+				if (e.getIdEnfant() == enfant.getIdEnfant()) {
+					bool = true;
 				}
+				
+				}
+			if (bool == false) {
 				lE.add(enfant);
-
 			}
+
 		}
 		return lE;
 	}
@@ -130,4 +158,5 @@ public class AtelierServiceImpl implements AtelierService {
 	public void ajoutEnfantBdd(Enfant e) throws DAOException {
 		EnfantDAOImpl.getInstance().insert(e);
 	}
+
 }

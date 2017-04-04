@@ -43,7 +43,14 @@ public class AtelierServiceMoke implements AtelierService {
 	 * Liste des enfants qui ne sont pas dans un atelier
 	 */
 	@Override
-	public List<Enfant> enfantNonOccupe(List<Atelier> l, List<Enfant> lEnfant) throws DAOException{
+	public List<Enfant> enfantOccupe(List<Atelier> l, List<Enfant> lEnfant) throws DAOException{
+		List<Enfant> l1=new ArrayList<Enfant>();
+		Enfant e=new Enfant("truc", "toto", new Date());
+		l1.add(e);
+		return l1;
+	}
+	
+	public List<Enfant> enfantNonOccupe(List<Atelier> l, List<Enfant> lEnfant) throws DAOException {
 		List<Enfant> l1=new ArrayList<Enfant>();
 		Enfant e=new Enfant("truc", "toto", new Date());
 		l1.add(e);
@@ -82,5 +89,11 @@ public class AtelierServiceMoke implements AtelierService {
 	public void ajoutEnfantBdd(Enfant e) throws DAOException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Boolean enfantDansUnAtelier(List<Enfant> lEnfant, Enfant e) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

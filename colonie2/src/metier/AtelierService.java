@@ -13,7 +13,11 @@ public interface AtelierService {
 	Integer nbPlace(Atelier A) throws DAOException;
 
 	List<Atelier> atelierNonPlein(List<Atelier> listAtelier) throws DAOException;
-
+	
+	Boolean enfantDansUnAtelier(List<Enfant> lEnfant, Enfant e);
+	
+	List<Enfant> enfantOccupe(List<Atelier> l, List<Enfant> lEnfant) throws DAOException;
+	
 	List<Enfant> enfantNonOccupe(List<Atelier> l, List<Enfant> lEnfant) throws DAOException;
 
 	Boolean verifierAge(Atelier a, Enfant e) throws DAOException;
@@ -25,6 +29,8 @@ public interface AtelierService {
 	List<Atelier> getListAtelier() throws DAOException;
 	
 	void ajoutEnfantBdd(Enfant e) throws DAOException;
+
+	
 
 
 }
