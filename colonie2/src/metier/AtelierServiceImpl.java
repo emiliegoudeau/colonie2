@@ -124,4 +124,8 @@ public class AtelierServiceImpl implements AtelierService {
 	public List<Atelier> getListAtelier() throws DAOException{
 		return AtelierDAOImpl.getInstance().selectAllAtelier();
 	}
+	
+	public void ajoutEnfantBdd(Enfant e) throws DAOException {
+		EnfantDAOImpl.getInstance().insert(e);
+	}
 }
