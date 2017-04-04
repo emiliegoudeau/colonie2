@@ -77,4 +77,10 @@ public class AtelierServiceMoke implements AtelierService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void ajoutEnfantBdd(Enfant e) throws DAOException {
+		// TODO Auto-generated method stub
+		
+	}
 }

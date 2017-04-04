@@ -5,6 +5,9 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +46,12 @@ public class Fenetre extends JFrame {
 	    addEnfant.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				fenetreAddEnfant();
+				try {
+					fenetreAddEnfant();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 	    });
 	    
@@ -114,7 +122,7 @@ public class Fenetre extends JFrame {
 	
 	
 	// Methode pour afficher la fenetre d'ajout d'un enfant
-	private void fenetreAddEnfant(){
+	private void fenetreAddEnfant() throws ParseException{
 		JFrame f = new JFrame();  //Remplacer JFrame par ta nouvelle fenetre
 		f.setSize(700, 600);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -137,10 +145,24 @@ public class Fenetre extends JFrame {
 		f.add(ajouter);
 		f.add(fermerfenetre(f));
 		
+		
 		ajouter.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent a) {
 				 //Appel a la methode pour ajouter un enfant a la base de données
+				try {
+
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+					Date ddn = sdf.parse(date.getText());
+					Enfant enfant = new Enfant(nom.getText(),prenom.getText(),ddn);
+					AtelierServiceImpl.getInstance().ajoutEnfantBdd(enfant);
+				} catch (DAOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}	
 	    });	
 		f.setVisible(true);

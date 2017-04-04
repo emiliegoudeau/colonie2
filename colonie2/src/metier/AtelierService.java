@@ -23,5 +23,8 @@ public interface AtelierService {
 	List<Enfant> getListEnfant() throws DAOException;
 
 	List<Atelier> getListAtelier() throws DAOException;
+	
+	void ajoutEnfantBdd(Enfant e) throws DAOException;
+
 
 }

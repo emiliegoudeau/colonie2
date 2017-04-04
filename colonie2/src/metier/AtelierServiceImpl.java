@@ -13,8 +13,9 @@ import entite.Enfant;
 
 public class AtelierServiceImpl implements AtelierService {
 
-	//private static final Logger logger = Logger.getLogger("log4j.AtelierServiceImpl");
-	
+	// private static final Logger logger =
+	// Logger.getLogger("log4j.AtelierServiceImpl");
+
 	protected List<Atelier> lAtelier = new ArrayList<Atelier>();
 
 	private static AtelierService instance = null;
@@ -85,14 +86,15 @@ public class AtelierServiceImpl implements AtelierService {
 			Boolean bool = false;
 			while (bool == false) {
 				for (Atelier atelier : l) {
-					for (Enfant e : atelier.getListe())
+					for (Enfant e : atelier.getListe()) {
 						if (enfant.getIdEnfant() == e.getIdEnfant()) {
 							bool = true;
 						}
+					}
 				}
-			}
-			lE.add(enfant);
+				lE.add(enfant);
 
+			}
 		}
 		return lE;
 	}
@@ -116,15 +118,15 @@ public class AtelierServiceImpl implements AtelierService {
 		return moyenne;
 	}
 
-	public List<Enfant> getListEnfant() throws DAOException{
+	public List<Enfant> getListEnfant() throws DAOException {
 		return EnfantDAOImpl.getInstance().selectAllEnfants();
-		
+
 	}
-	
-	public List<Atelier> getListAtelier() throws DAOException{
+
+	public List<Atelier> getListAtelier() throws DAOException {
 		return AtelierDAOImpl.getInstance().selectAllAtelier();
 	}
-	
+
 	public void ajoutEnfantBdd(Enfant e) throws DAOException {
 		EnfantDAOImpl.getInstance().insert(e);
 	}
