@@ -66,5 +66,15 @@ public class AtelierServiceMoke implements AtelierService {
 		return 8;
 	}
 
-	
+	@Override
+	public List<Enfant> getListEnfant() throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Atelier> getListAtelier() throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

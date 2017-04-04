@@ -7,6 +7,7 @@ import java.util.List;
 
 import ad.AtelierDAOImpl;
 import ad.DAOException;
+import ad.EnfantDAOImpl;
 import entite.Atelier;
 import entite.Enfant;
 
@@ -115,4 +116,12 @@ public class AtelierServiceImpl implements AtelierService {
 		return moyenne;
 	}
 
+	public List<Enfant> getListEnfant() throws DAOException{
+		return EnfantDAOImpl.getInstance().selectAllEnfants();
+		
+	}
+	
+	public List<Atelier> getListAtelier() throws DAOException{
+		return AtelierDAOImpl.getInstance().selectAllAtelier();
+	}
 }

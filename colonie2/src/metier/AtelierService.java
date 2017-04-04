@@ -20,4 +20,8 @@ public interface AtelierService {
 
 	Integer moyenneAge(Atelier a) throws DAOException;
 
+	List<Enfant> getListEnfant() throws DAOException;
+
+	List<Atelier> getListAtelier() throws DAOException;
+
 }
